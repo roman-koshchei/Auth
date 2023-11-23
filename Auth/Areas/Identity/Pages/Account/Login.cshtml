@@ -1,0 +1,48 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<hgroup>
+    <h1>Login</h1>
+    <h2>Use a local account to log in.</h2>
+</hgroup>
+
+<form id="account" method="post">
+    <div asp-validation-summary="ModelOnly" role="alert"></div>
+    
+    <label asp-for="Input.Email">Email</label>
+    <input asp-for="Input.Email" autocomplete="username" placeholder="name@example.com" required />
+    <span asp-validation-for="Input.Email"></span>
+    
+    <label asp-for="Input.Password">Password</label>
+    <input asp-for="Input.Password" autocomplete="current-password" placeholder="password" required />
+    <span asp-validation-for="Input.Password"></span>
+    
+    <label asp-for="Input.RememberMe">
+        <input asp-for="Input.RememberMe" />
+        @Html.DisplayNameFor(m => m.Input.RememberMe)
+    </label>
+        
+    <button type="submit">Login</button>
+</form>
+
+<form asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+    @foreach (var provider in Model.ExternalLogins!)
+    {
+        <button type="submit" class="outline" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+    }
+</form>
+
+<div>
+    <a asp-page="./ForgotPassword">Forgot your password?</a>
+    <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+    <a asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
