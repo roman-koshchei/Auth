@@ -22,6 +22,11 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
 
 builder.Services
     .AddAuthentication()
+    .AddCookie(options =>
+    {
+        options.Cookie.SameSite = SameSiteMode.None;
+        options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+    })
     .AddGoogle(options =>
     {
         options.ClientId = "518306364318-rurongs4fdjd0qr9s3lclq90h4ktbfrp.apps.googleusercontent.com";
@@ -30,6 +35,7 @@ builder.Services
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
+    options.Cookie.SameSite = SameSiteMode.None;
     options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
 });
 
