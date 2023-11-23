@@ -20,11 +20,6 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
     options.ForwardedHeaders = ForwardedHeaders.All;
 });
 
-builder.Services.AddHttpsRedirection(options =>
-{
-    options.HttpsPort = 443;
-});
-
 builder.Services
     .AddAuthentication()
     .AddCookie(options =>
