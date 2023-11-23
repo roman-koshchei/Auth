@@ -28,6 +28,11 @@ builder.Services
         options.ClientSecret = "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";
     });
 
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+});
+
 var app = builder.Build();
 
 app.UseForwardedHeaders();
