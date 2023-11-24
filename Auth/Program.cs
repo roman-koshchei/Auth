@@ -20,6 +20,14 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
     options.ForwardedHeaders = ForwardedHeaders.All;
 });
 
+builder.Services.AddAntiforgery(options =>
+{
+    // Set Cookie properties using CookieBuilder properties†.
+    options.FormFieldName = "Shmoken";
+    options.HeaderName = "X-CSRF-TOKEN-SHMOKEN";
+    options.SuppressXFrameOptionsHeader = false;
+});
+
 builder.Services
     .AddAuthentication()
     .AddCookie(options =>
